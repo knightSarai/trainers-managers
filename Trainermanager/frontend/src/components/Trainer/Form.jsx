@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {addTrainer} from '../../redux/trainers/trainers.actions';
 
-export default class Form extends Component {
+class Form extends Component {
     state = {
         name: '',
         email: '',
@@ -12,14 +14,15 @@ export default class Form extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        console.log("submit!");
+        const {name, email, message} = this.state;
+        this.props.addTrainer({name, email, message})
     }
 
     render() {
         const {name, email, message} = this.state;
         return (
             <div className="card card-body mt-4 mb-4">
-                <h2>add form</h2>
+                <h2>add Trainer</h2>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label htmlFor="name">Name</label>
@@ -57,3 +60,5 @@ export default class Form extends Component {
         )
     }
 }
+
+export default connect(null, {addTrainer})(Form)

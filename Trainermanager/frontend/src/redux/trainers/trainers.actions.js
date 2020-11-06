@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_TRAINERS, DELETE_TRAINERS} from './trainers.types';
+import {GET_TRAINERS, DELETE_TRAINERS, ADD_TRAINERS} from './trainers.types';
 
 // GET TRAINERS
 export const getTrainers = () => async dispatch => {
@@ -15,12 +15,25 @@ export const getTrainers = () => async dispatch => {
 }
 
 // DELETE TRAINERS
-export const deleteTrainers = (id) => async dispatch => {
+export const deleteTrainer = (id) => async dispatch => {
     try {
         await axios.delete(`/api/trainers/${id}`);
         dispatch({
             type: DELETE_TRAINERS,
             payload: id
+        })
+    }catch(error){
+        console.log(error);
+    }
+}
+
+// ADD TRAINERS
+export const addTrainer = (trainer) => async dispatch => {
+    try {
+        const response = await axios.post(`/api/trainers/`, trainer);
+        dispatch({
+            type: ADD_TRAINERS,
+            payload: response.data
         })
     }catch(error){
         console.log(error);
