@@ -3,17 +3,19 @@ import PropTypes from 'prop-types';
 /**Redux */
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
-import {getTrainers} from '../../redux/trainers/trainers.actions'
+import {getTrainers, deleteTrainers} from '../../redux/trainers/trainers.actions'
 import {selectTrainers} from '../../redux/trainers/trainers.selectors'
 class Trainers extends Component {
     static propTypes = {
-        trainers: PropTypes.array.isRequired
+        trainers: PropTypes.array.isRequired,
+        getTrainers: PropTypes.func.isRequired,
+        deleteTrainers: PropTypes.func.isRequired,
     }
     componentDidMount() {
         this.props.getTrainers();
     }
     render() {
-        const {trainers} = this.props;
+        const {trainers, deleteTrainers} = this.props;
         return (
             <div>
                 <h1>Trainers List</h1>
@@ -34,7 +36,7 @@ class Trainers extends Component {
                                     <td>{trainer.name}</td>
                                     <td>{trainer.email}</td>
                                     <td>{trainer.message}</td>
-                                    <td><button className="btn btn-danger btn-sm">Delete</button></td>
+                                    <td><button className="btn btn-danger btn-sm" onClick={()=> deleteTrainers(trainer.id)}>Delete</button></td>
                                 </tr>
                             ))
                         }
@@ -48,4 +50,4 @@ class Trainers extends Component {
 const mapStateToProps = createStructuredSelector({
     trainers: selectTrainers
 })
-export default connect(mapStateToProps, {getTrainers})(Trainers)
+export default connect(mapStateToProps, {getTrainers, deleteTrainers})(Trainers)
