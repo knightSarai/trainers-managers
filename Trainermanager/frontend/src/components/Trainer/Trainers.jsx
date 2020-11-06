@@ -1,6 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {getTrainers} from '../../redux/trainers/trainers.actions'
 
-export default class Trainers extends Component {
+class Trainers extends Component {
+    static propTypes = {
+        trainers: PropTypes.array.isRequired
+    }
+    componentDidMount() {
+        this.props.getTrainers();
+    }
     render() {
         return (
             <div>
@@ -9,3 +18,9 @@ export default class Trainers extends Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    trainers: state.trainers.trainers
+})
+
+export default connect(mapStateToProps, {getTrainers})(Trainers)
