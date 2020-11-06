@@ -1,8 +1,10 @@
 import React, { Component} from 'react';
 import PropTypes from 'prop-types';
+/**Redux */
 import {connect} from 'react-redux';
+import {createStructuredSelector} from 'reselect';
 import {getTrainers} from '../../redux/trainers/trainers.actions'
-
+import {selectTrainers} from '../../redux/trainers/trainers.selectors'
 class Trainers extends Component {
     static propTypes = {
         trainers: PropTypes.array.isRequired
@@ -11,16 +13,39 @@ class Trainers extends Component {
         this.props.getTrainers();
     }
     render() {
+        const {trainers} = this.props;
         return (
             <div>
                 <h1>Trainers List</h1>
+                <table className="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            trainers.map(trainer => (
+                                <tr key={trainer.id}>
+                                    <td>{trainer.id}</td>
+                                    <td>{trainer.name}</td>
+                                    <td>{trainer.email}</td>
+                                    <td>{trainer.message}</td>
+                                    <td><button className="btn btn-danger btn-sm">Delete</button></td>
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </table>  
             </div>
         )
     }
 }
 
-const mapStateToProps = state => ({
-    trainers: state.trainers.trainers
+const mapStateToProps = createStructuredSelector({
+    trainers: selectTrainers
 })
-
 export default connect(mapStateToProps, {getTrainers})(Trainers)
