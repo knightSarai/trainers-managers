@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import Layout from '../components/layout';
+import Dashboard from './Trainer';
+
 export default class App extends Component {
     render() {
         return (
             <Layout>
-                <div>
-                    react App
+                <div className="container">
+                    <Dashboard />
                 </div>
             </Layout>
 

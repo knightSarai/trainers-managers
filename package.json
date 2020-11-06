@@ -4,7 +4,7 @@
   "description": "built using django - react -redux - djangorestframework",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development ./Trainermanager/frontend/src/index.js -o ./Trainermanager/frontend/static/frontend/main.js",
+    "dev": "webpack --mode development --watch ./Trainermanager/frontend/src/index.js -o ./Trainermanager/frontend/static/frontend/main.js",
     "build": "webpack --mode production ./Trainermanager/frontend/src/index.js -o ./Trainermanager/frontend/static/frontend/main.js"
   },
   "repository": {
