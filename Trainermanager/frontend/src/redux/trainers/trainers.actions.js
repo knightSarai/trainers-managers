@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {GET_TRAINERS, DELETE_TRAINERS, ADD_TRAINERS} from './trainers.types';
-
+import {GET_ERRORS} from '../errors/errors.types';
 // GET TRAINERS
 export const getTrainers = () => async dispatch => {
     try {
@@ -28,14 +28,22 @@ export const deleteTrainer = (id) => async dispatch => {
 }
 
 // ADD TRAINERS
-export const addTrainer = (trainer) => async dispatch => {
-    try {
-        const response = await axios.post(`/api/trainers/`, trainer);
-        dispatch({
-            type: ADD_TRAINERS,
-            payload: response.data
+export const addTrainer = (trainer) => dispatch => {
+    axios
+        .post(`/api/trainers/`, trainer)
+        .then(res => {
+            dispatch({
+                type: ADD_TRAINERS,
+                payload: res.data
+            })
         })
-    }catch(error){
-        console.log(error);
-    }
+        .catch(err => {
+            dispatch({
+                type: GET_ERRORS,
+                payload: {
+                    msg: err.response.data,
+                    status: err.response.status
+                }
+            })
+        })
 }
