@@ -11,4 +11,5 @@ ReactDOM.render(
     <ReduxProvider store={store}>
         <App/>
     </ReduxProvider>
-    ,document.getElementById('app'));
+    ,document.getElementById('app')
+);
