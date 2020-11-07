@@ -1,9 +1,12 @@
-import React, { Component } from 'react'
-import Layout from '../components/layout';
-import Dashboard from './Trainer';
+import React, { Component } from 'react';
 /**React Alerts */
 import {positions, Provider as AlertProvider} from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
+/**Components */
+import Layout from '../components/layout';
+import Dashboard from './Trainer';
+import Alerts from './layout/Alert.jsx'
+
 /**Alert Options */
 const alertOptions = {
     timeout: 3000,
