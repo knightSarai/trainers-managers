@@ -19,7 +19,7 @@ class Form extends Component {
         this.setState({
             name: '',
             email: '',
-                message: ''
+            message: ''
         })
     }
 
