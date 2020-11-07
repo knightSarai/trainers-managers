@@ -15,7 +15,12 @@ class Form extends Component {
     onSubmit = e => {
         e.preventDefault();
         const {name, email, message} = this.state;
-        this.props.addTrainer({name, email, message})
+        this.props.addTrainer({name, email, message});
+        this.setState({
+            name: '',
+            email: '',
+                message: ''
+        })
     }
 
     render() {
